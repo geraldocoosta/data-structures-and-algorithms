@@ -6,6 +6,9 @@ public class LongestPalindromicSubstring2 {
         System.out.println(new LongestPalindromicSubstring2().longestPalindrome("abcacba"));
     }
 
+    // Time Complexity - O(N^2),
+    // Space complexity - O(N^2).
+
     public String longestPalindrome(String str) {
 
         if (str == null || str.length() <= 1)
