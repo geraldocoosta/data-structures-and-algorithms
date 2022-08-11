@@ -6,6 +6,10 @@ public class LongestPalindromicSubstring {
         System.out.println(new LongestPalindromicSubstring().longestPalindrome("a"));
     }
 
+    // Solução com
+    // Time Complexity - O(N^4),  O(N^2) to generate all substring and O(N) to check it is palindrome or not. and O(n) to substring
+    // Space complexity - O(1).
+
     // Agora, posso testar todas as possibilidades dentro de substrings da parametro word
     public String longestPalindrome(String word) {
         if (word == null || word.isBlank()) {
