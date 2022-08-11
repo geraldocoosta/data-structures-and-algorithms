@@ -13,10 +13,9 @@ public class NumberOfIslands {
     }
 
     //Complexity Analysis
-    //
     //Time complexity : O(M×N) where M is the number of rows and N is the number of columns.
-    //
     //Space complexity : worst case O(M×N) in case that the grid map is filled with lands where DFS goes by M×N deep.
+
     void deepFirstSearch(char[][] grid, int axisY, int axisX, int totalHeight, int totalWidth) {
         if (axisY < 0 || axisX < 0 || axisY > totalHeight || axisX > totalWidth || grid[axisY][axisX] == '0') {
             return;
