@@ -76,9 +76,8 @@ public class SumOfSubarrayMinimums {
         }
 
         int ans = 0;
-        int mod = 1000000007;
         for (int i = 0; i < nums.length; i++) {
-            ans = ( ans +( nums[i] * leftDistance[i] * rightDistance[i])) % mod;
+            ans +=  nums[i] * leftDistance[i] * rightDistance[i];
         }
         return ans;
     }
