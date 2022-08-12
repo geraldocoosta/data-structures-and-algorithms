@@ -6,6 +6,9 @@ import java.util.List;
 
 public class BinaryTreeLevelOrderTraversal {
 
+    // Time Complexity: O(N), where N is the number of nodes in the tree.
+    //
+    //Space Complexity: O(N) where N is the number of nodes in the tree.
     public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
