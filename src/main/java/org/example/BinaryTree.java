@@ -58,7 +58,7 @@ public class BinaryTree {
         System.out.println(decoded);
 
     }
-    
+
     static class Node {
         int data;
         Node left;
