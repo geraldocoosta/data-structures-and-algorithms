@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class SumOfSubarrayRanges2 {
 
     // Time O(n)
-    // Space O(2*n) -> usamos o stack no maximo uma vez por elemento
+    // Space O(5*n) -> usamos o stack no maximo uma vez por elemento
 
     Deque<long[]> stack = new LinkedList<>();
 
