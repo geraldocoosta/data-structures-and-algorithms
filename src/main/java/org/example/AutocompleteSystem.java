@@ -10,6 +10,7 @@ public class AutocompleteSystem {
     TrieNode root;
     String prefix;
 
+    // TODO: Estudar
     public AutocompleteSystem(String[] sentences, int[] times) {
         root = new TrieNode();
         prefix = "";

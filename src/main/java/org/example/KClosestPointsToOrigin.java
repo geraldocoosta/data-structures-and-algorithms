@@ -7,6 +7,8 @@ public class KClosestPointsToOrigin {
     //Time Complexity: O(NlogN), where N is the length of points.
     //
     //Space Complexity: O(N).
+
+    // TODO: estudar
     public int[][] kClosest(int[][] points, int k) {
         int pointsLength = points.length;
         int[] distances = new int[pointsLength];

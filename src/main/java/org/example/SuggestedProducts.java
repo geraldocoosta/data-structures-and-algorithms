@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SuggestProducts {
+public class SuggestedProducts {
 
 
     public static void main(String[] args) {
         String[] strings = {"geladeira", "gelo", "gerson"};
-        System.out.println(new SuggestProducts().suggestedProducts(strings, "gerson"));
+        System.out.println(new SuggestedProducts().suggestedProducts(strings, "gerson"));
     }
 
 
@@ -52,6 +52,8 @@ public class SuggestProducts {
 }
 
 /*
+*
+* Search Suggestions System
 *
 * You are given an array of strings products and a string searchWord.
 

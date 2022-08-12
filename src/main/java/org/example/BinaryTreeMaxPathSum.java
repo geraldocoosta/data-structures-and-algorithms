@@ -9,6 +9,7 @@ public class BinaryTreeMaxPathSum {
     //Space complexity: O(H), where H is a tree height, to keep the recursion stack.
     // In the average case of balanced tree, the tree height H=logN, in the worst case of skewed tree, H=N.
 
+    // TODO: ESTUDAR
     public int maxGain(TreeNode node) {
         if (node == null) {
             return 0;

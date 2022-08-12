@@ -6,6 +6,7 @@ public class TrappingRainWater {
     //Time complexity: O(n). Single iteration of O(n).
     //Space complexity: O(1) extra space. Only constant space required for left, right, left_max and right_max.
 
+    // TODO: ESTUDAR
     public static void main(String[] args) {
         System.out.println(new TrappingRainWater().trap(new int[]{0,1,2,1,0,1,4,3,2,3,1}));
     }

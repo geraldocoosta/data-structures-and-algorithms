@@ -9,6 +9,7 @@ public class DeepCopyArrayList {
     //Space Complexity : O(N) as we have a dictionary containing mapping from old list nodes to new list nodes.
     // Since there are N nodes, we have O(N) space complexity.
 
+    // TODO: Estudar
     HashMap<Node, Node> visited = new HashMap<>();
 
     public Node getClonedNode(Node node) {
