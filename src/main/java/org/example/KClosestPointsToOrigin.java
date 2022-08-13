@@ -1,32 +1,32 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class KClosestPointsToOrigin {
 
     //Time Complexity: O(NlogN), where N is the length of points.
     //
     //Space Complexity: O(N).
-
-    // TODO: estudar
-    public int[][] kClosest(int[][] points, int k) {
-        int pointsLength = points.length;
-        int[] distances = new int[pointsLength];
-        for (int i = 0; i < pointsLength; ++i)
-            distances[i] = getDistances(points[i]);
-
-        Arrays.sort(distances);
-        int distK = distances[k-1];
-
-        int[][] ans = new int[k][2];
-        int t = 0;
-        for (int[] point : points)
-            if (getDistances(point) <= distK)
-                ans[t++] = point;
-        return ans;
+    public static void main(String[] args) {
+        int[][] ints = new KClosestPointsToOrigin().kClosest(new int[][]{{1, 3}, {-2, 2}}, 1);
+        for (int[] i : ints) {
+            System.out.println(Arrays.toString(i));
+        }
     }
 
-    public int getDistances(int[] point) {
+    public int[][] kClosest(int[][] points, int K) {
+        Queue<int[]> pq = new PriorityQueue<>((p1, p2) -> distance(p2) - distance(p1));
+        for (int[] p : points) {
+            pq.add(p);
+            if (pq.size() > K)
+                pq.poll();
+        }
+        return pq.toArray(new int[K][2]);
+    }
+
+    private int distance(int[] point) {
         return point[0] * point[0] + point[1] * point[1];
     }
 }

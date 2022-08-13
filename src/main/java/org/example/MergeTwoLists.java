@@ -1,6 +1,6 @@
 package org.example;
 
-public class mergeTwoLists {
+public class MergeTwoLists {
 
     public static void main(String[] args) {
         // create two ListNode
@@ -14,8 +14,8 @@ public class mergeTwoLists {
         third.next = fourth;
 
         System.out.println();
-        System.out.println(new mergeTwoLists().mergeTwoLists1(first, third));
-        System.out.println(new mergeTwoLists().mergeTwoLists2(first, third));
+        System.out.println(new MergeTwoLists().mergeTwoLists1(first, third));
+        System.out.println(new MergeTwoLists().mergeTwoLists2(first, third));
 
     }
 
