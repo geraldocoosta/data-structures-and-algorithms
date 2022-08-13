@@ -14,23 +14,25 @@ public class MergeKSortedLists {
         ListNode listNode = mergeKSortedLists.mergeKLists(listNodes);
         System.out.println(listNode);
 
+
         listNodes = mergeKSortedLists.generateNodes();
         listNode = mergeKSortedLists.mergeKLists2(listNodes);
         System.out.println(listNode);
 
-        listNodes = mergeKSortedLists.generateNodes();
-        listNode = mergeKSortedLists.mergeKLists3(listNodes);
-        System.out.println(listNode);
-
-        listNodes = mergeKSortedLists.generateNodes();
-        listNode = mergeKSortedLists.mergeKLists4(listNodes);
-        System.out.println(listNode);
-
-        listNodes = mergeKSortedLists.generateNodes();
-        listNode = mergeKSortedLists.mergeKLists5(listNodes);
-        System.out.println(listNode);
     }
 
+
+    // Brute force
+
+    //Time complexity : O(NlogN) where NN is the total number of nodes.
+    //
+    //Collecting all the values costs O(N) time.
+    //A stable sorting algorithm costs O(NlogN) time.
+    //Iterating for creating the linked list costs O(N) time.
+    //Space complexity : O(N).
+    //
+    //Sorting cost O(N) space (depends on the algorithm you choose).
+    //Creating a new linked list costs O(N) space.
     public ListNode mergeKLists(ListNode[] lists) {
         List<Integer> l = new ArrayList<>();
 
@@ -54,64 +56,15 @@ public class MergeKSortedLists {
         return head.next;
     }
 
+
+    // Time space O(NLogN)
+    // Space complexity :
+    //
+    //O(n) Creating a new linked list costs O(n)O(n) space.
+    //O(k) The code above present applies in-place method which cost O(1) space.
+    // And the priority queue (often implemented with heaps) costs O(k) space (it's far less than NN in most situations).
+
     public ListNode mergeKLists2(ListNode[] lists) {
-        int min_index = 0;
-        ListNode head = new ListNode(0);
-        ListNode h = head;
-        while (true) {
-            boolean isBreak = true;
-            int min = Integer.MAX_VALUE;
-            for (int i = 0; i < lists.length; i++) {
-                if (lists[i] != null) {
-                    if (lists[i].val < min) {
-                        min_index = i;
-                        min = lists[i].val;
-                    }
-                    isBreak = false;
-                }
-
-            }
-            if (isBreak) {
-                break;
-            }
-            ListNode a = new ListNode(lists[min_index].val);
-            h.next = a;
-            h = h.next;
-            lists[min_index] = lists[min_index].next;
-        }
-        h.next = null;
-        return head.next;
-    }
-
-    public ListNode mergeKLists3(ListNode[] lists) {
-        int min_index = 0;
-        ListNode head = new ListNode(0);
-        ListNode h = head;
-        while (true) {
-            boolean isBreak = true;
-            int min = Integer.MAX_VALUE;
-            for (int i = 0; i < lists.length; i++) {
-                if (lists[i] != null) {
-                    if (lists[i].val < min) {
-                        min_index = i;
-                        min = lists[i].val;
-                    }
-                    isBreak = false;
-                }
-
-            }
-            if (isBreak) {
-                break;
-            }
-            h.next = lists[min_index];
-            h = h.next;
-            lists[min_index] = lists[min_index].next;
-        }
-        h.next = null;
-        return head.next;
-    }
-
-    public ListNode mergeKLists4(ListNode[] lists) {
 
         Queue<ListNode> q = new PriorityQueue<>((o1, o2) -> o1.val - o2.val);
         for (ListNode l : lists) {
@@ -130,45 +83,6 @@ public class MergeKSortedLists {
             }
         }
         return head.next;
-    }
-
-
-    public ListNode mergeKLists5(ListNode[] lists) {
-        if (lists.length == 0) {
-            return null;
-        }
-        int interval = 1;
-        while (interval < lists.length) {
-            for (int i = 0; i + interval < lists.length; i = i + interval * 2) {
-                lists[i] = mergeTwoLists(lists[i], lists[i + interval]);
-            }
-            interval *= 2;
-        }
-
-        return lists[0];
-    }
-
-    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        ListNode h = new ListNode(0);
-        ListNode ans = h;
-        while (l1 != null && l2 != null) {
-            if (l1.val < l2.val) {
-                h.next = l1;
-                h = h.next;
-                l1 = l1.next;
-            } else {
-                h.next = l2;
-                h = h.next;
-                l2 = l2.next;
-            }
-        }
-        if (l1 == null) {
-            h.next = l2;
-        }
-        if (l2 == null) {
-            h.next = l1;
-        }
-        return ans.next;
     }
 
     public ListNode[] generateNodes() {
