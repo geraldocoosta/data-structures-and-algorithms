@@ -11,13 +11,16 @@ public class ThreeSum {
     }
 
     // Time O(n²)
-    // Space O(logN) - por causa do sort
+    // Space O(logN) ou O(N) - por causa do sort
     public List<List<Integer>> threeSum(int[] nums) {
         Arrays.sort(nums);
         List<List<Integer>> res = new ArrayList<>();
+        // Se num[i] for maior que zero, todas as respostas serão maior que 0
         for (int i = 0; i < nums.length && nums[i] <= 0; ++i) {
             // Meu primeiro item do array sempre vai passar por aqui
             // ou se meu valor atual for diferente do valor anterior
+
+            // Se o meu nums[i] atual tem que ser diferente do anterior
             if (i == 0 || nums[i - 1] != nums[i]) {
                 twoSum(nums, i, res);
             }
