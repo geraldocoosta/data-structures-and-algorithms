@@ -8,17 +8,18 @@ public class LowestCommonAncestor {
     //Space Complexity: O(N).
     // This is because the maximum amount of space utilized by the recursion stack would be NN since the height of a skewed BST could be NN.
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        int parentVal = root.val;
-        int pVal = p.val;
-        int qVal = q.val;
+        if (root == null || root == p || root == q) return root;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
 
-        if (pVal > parentVal && qVal > parentVal) {
-            return lowestCommonAncestor(root.right, p, q);
-        } else if (pVal < parentVal && qVal < parentVal) {
-            return lowestCommonAncestor(root.left, p, q);
-        } else {
-            return root;
+        if (left == null) {
+            return right;
         }
+        else if (right == null) {
+            return left;
+        }
+
+        return root;
     }
 }
 
