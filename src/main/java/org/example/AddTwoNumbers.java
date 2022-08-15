@@ -6,10 +6,13 @@ public class AddTwoNumbers {
         ListNode head1 = new ListNode(2);
         head1.next = new ListNode(4);
         head1.next.next = new ListNode(3);
+
         ListNode head2 = new ListNode(5);
         head2.next = new ListNode(6);
         head2.next.next = new ListNode(4);
+
         ListNode listNode = new AddTwoNumbers().addTwoNumbers(head1, head2);
+
         System.out.println(listNode);
     }
 
@@ -28,10 +31,12 @@ public class AddTwoNumbers {
             carry = sum / 10;
             curr.next = new ListNode(sum % 10);
             curr = curr.next;
-            if (l1 != null)
+            if (l1 != null) {
                 l1 = l1.next;
-            if (l2 != null)
+            }
+            if (l2 != null) {
                 l2 = l2.next;
+            }
         }
         return dummyHead.next;
     }

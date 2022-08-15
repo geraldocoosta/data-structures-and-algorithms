@@ -12,14 +12,14 @@ import java.util.Set;
 
 public class WordLadderII {
 
-    public static void main(String[] args) {
-        WordLadderII w = new WordLadderII();
-        System.out.println(w.findLadders("hit", "cog", List.of("hot","dot","dog","lot","log","cog")));
-    }
-
     Map<String, List<String>> adjList = new HashMap<>();
     List<String> currPath = new ArrayList<>();
     List<List<String>> shortestPaths = new ArrayList<>();
+
+    public static void main(String[] args) {
+        WordLadderII w = new WordLadderII();
+        System.out.println(w.findLadders("hit", "cog", List.of("hot", "dot", "dog", "lot", "log", "cog")));
+    }
 
     public List<List<String>> findLadders(String beginWord, String endWord, List<String> wordList) {
         // copying the words into the set for efficient deletion in BFS

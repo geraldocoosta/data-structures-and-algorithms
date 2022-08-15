@@ -7,7 +7,7 @@ public class ReverseInteger {
     }
 
     // Time Complexity: O(log(x)). There are roughly log 10 (x) digits in x.
-    //Space Complexity:O(1).
+    // Space Complexity:O(1).
     public int reverse(int x) {
         int res = 0;
         while (x != 0) {

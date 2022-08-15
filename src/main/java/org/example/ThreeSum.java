@@ -7,7 +7,7 @@ import java.util.List;
 public class ThreeSum {
 
     public static void main(String[] args) {
-        System.out.println(new ThreeSum().threeSum(new int[]{-1,0,1,2,-1,-4}));
+        System.out.println(new ThreeSum().threeSum(new int[]{-1, 0, 1, 2, -1, -4}));
     }
 
     // Time O(n²)
@@ -20,7 +20,7 @@ public class ThreeSum {
             // Meu primeiro item do array sempre vai passar por aqui
             // ou se meu valor atual for diferente do valor anterior
 
-            // Se o meu nums[i] atual tem que ser diferente do anterior
+            // Se o meu nums[i] atual for diferente do anterior
             if (i == 0 || nums[i - 1] != nums[i]) {
                 twoSum(nums, i, res);
             }

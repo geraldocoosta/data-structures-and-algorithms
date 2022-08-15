@@ -6,9 +6,8 @@ public class TrappingRainWater {
     //Time complexity: O(n). Single iteration of O(n).
     //Space complexity: O(1) extra space. Only constant space required for left, right, left_max and right_max.
 
-    // TODO: ESTUDAR
     public static void main(String[] args) {
-        System.out.println(new TrappingRainWater().trap(new int[]{0,1,2,1,0,1,4,3,2,3,1}));
+        System.out.println(new TrappingRainWater().trap(new int[]{0, 1, 2, 1, 0, 1, 4, 3, 2, 3, 1}));
     }
 
     private int trap(int[] height) {
@@ -19,8 +18,12 @@ public class TrappingRainWater {
         int rightMax = 0;
         int ans = 0;
         while (left < right) {
-            if (height[left] > leftMax) leftMax = height[left];
-            if (height[right] > rightMax) rightMax = height[right];
+            if (height[left] > leftMax) {
+                leftMax = height[left];
+            }
+            if (height[right] > rightMax) {
+                rightMax = height[right];
+            }
             if (leftMax < rightMax) {
                 ans += Math.max(0, leftMax - height[left]);
                 left++;

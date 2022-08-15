@@ -15,7 +15,6 @@ public class WordBreak {
         wordDict.add("leet");
         wordDict.add("code");
         System.out.println(wordBreak(s, wordDict));
-        System.out.println(wordBreak(s, wordDict));
         System.out.println(wordBreakBFS(s, wordDict));
     }
 
@@ -39,7 +38,9 @@ public class WordBreak {
         Set<String> wordDictSet = new HashSet<>(wordDict);
         Queue<Integer> queue = new LinkedList<>();
         boolean[] visited = new boolean[s.length()];
+
         queue.add(0);
+
         while (!queue.isEmpty()) {
             int start = queue.remove();
             if (visited[start]) {
