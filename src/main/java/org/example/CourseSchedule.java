@@ -30,7 +30,7 @@ public class CourseSchedule {
         int count = 0;
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < indegree.length; i++) {
-            if (indegree[i] == 0) queue.offer(i);
+            if (indegree[i] == 0) queue.add(i);
         }
         while (!queue.isEmpty()) {
             int course = queue.poll();
@@ -38,7 +38,7 @@ public class CourseSchedule {
             for (int i = 0; i < numCourses; i++) {
                 if (matrix[course][i] != 0) {
                     if (--indegree[i] == 0) {
-                        queue.offer(i);
+                        queue.add(i);
                     }
                 }
             }
