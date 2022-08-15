@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BinaryTreeLevelOrderTraversal {
+public class BinaryTreeZigZagLevelOrderTraversal {
 
     // Time Complexity: O(N), where N is the number of nodes in the tree.
     //
     //Space Complexity: O(N) where N is the number of nodes in the tree.
 
-    // TODO: Estudar
     public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if (root == null) {
             return new ArrayList<>();
@@ -23,11 +22,17 @@ public class BinaryTreeLevelOrderTraversal {
         nodeQueue.addLast(null);
 
         LinkedList<Integer> levelList = new LinkedList<>();
+        boolean isOrderLeft = true;
+
 
         while (!nodeQueue.isEmpty()) {
             TreeNode currentNode = nodeQueue.pollFirst();
             if (currentNode != null) {
-                levelList.addLast(currentNode.val);
+                if (isOrderLeft) {
+                    levelList.addLast(currentNode.val);
+                } else {
+                    levelList.addFirst(currentNode.val);
+                }
 
                 if (currentNode.left != null) {
                     nodeQueue.addLast(currentNode.left);
@@ -41,6 +46,7 @@ public class BinaryTreeLevelOrderTraversal {
                 if (!nodeQueue.isEmpty()) {
                     nodeQueue.addLast(null);
                 }
+                isOrderLeft = !isOrderLeft;
             }
         }
         return results;
@@ -49,7 +55,9 @@ public class BinaryTreeLevelOrderTraversal {
 }
 
 /*
-Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+Binary Tree Zigzag Level Order Traversal
+
+* Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).
 
 
 
@@ -57,7 +65,7 @@ Example 1:
 
 
 Input: root = [3,9,20,null,null,15,7]
-Output: [[3],[9,20],[15,7]]
+Output: [[3],[20,9],[15,7]]
 Example 2:
 
 Input: root = [1]
@@ -71,5 +79,5 @@ Output: []
 Constraints:
 
 The number of nodes in the tree is in the range [0, 2000].
--1000 <= Node.val <= 1000
+-100 <= Node.val <= 100
 * */

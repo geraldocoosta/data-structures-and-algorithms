@@ -15,7 +15,7 @@ public class SuggestedProducts2 {
 
         Trie trie = new Trie();
 
-        List<List<String>> result =  new ArrayList<>();
+        List<List<String>> result = new ArrayList<>();
 
         for (String produto : products) {
             trie.insert(produto);
@@ -30,7 +30,6 @@ public class SuggestedProducts2 {
         }
 
 
-
         return result;
     }
 
@@ -43,11 +42,11 @@ public class SuggestedProducts2 {
             root = new Node();
         }
 
-        void insert (String s) {
+        void insert(String s) {
             Node curr = root;
             // para cada caractere da palavra
             char[] stringChars = s.toCharArray();
-            for (int i = 0; i< stringChars.length; i++) {
+            for (int i = 0; i < stringChars.length; i++) {
                 // vou verificar se já tem settado um objeto Node na posição da letra i
                 if (curr.childrenNodes.get(stringChars[i] - 'a') == null) {
                     // Se não tiver, eu crio um objeto node naquela posição, marcando que tem algum caminho valido ali
@@ -88,7 +87,7 @@ public class SuggestedProducts2 {
         private void dfs(Node curr, String forSearch) {
             // se já tenho 3 resultados, retorno
             if (results.size() == 3) {
-                 return;
+                return;
             }
             // se o node atual é um produto, eu adiciono ele na minha lista
             if (curr.isProduct) {

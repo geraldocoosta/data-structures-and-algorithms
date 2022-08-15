@@ -25,8 +25,6 @@ public class SubstringWithLargestVariance {
     //  This is Kadane algoritm
 
 
-
-
     // Time N(n³)
     // Space O(N) onde N é o tamanho da string, pois vamos criar um hash map pra cada caractere
     // No pior caso, vai ser 1 espaço ocupado por cada caractere da String
@@ -39,11 +37,13 @@ public class SubstringWithLargestVariance {
         int variance = 0;
 
         // Passando sobre cada um dos caracteres
-        for (Character primaryChar: charCount.keySet()) {
-            for (Character secondaryChar: charCount.keySet()) {
+        for (Character primaryChar : charCount.keySet()) {
+            for (Character secondaryChar : charCount.keySet()) {
 
                 // Algoritmo não funciona se os dois caracteres analizados forem os mesmo
-                if (primaryChar.equals(secondaryChar)) { continue; }
+                if (primaryChar.equals(secondaryChar)) {
+                    continue;
+                }
 
                 // pegando o valor de aparições do meu secondary Char
                 int secondaryCharCount = charCount.get(secondaryChar);
@@ -76,7 +76,7 @@ public class SubstringWithLargestVariance {
                     if (secondaryFreq > 0 && primaryFreq > secondaryFreq) {
                         // Variança vai ser ou a variança, ou a variança do primeiro menos a do segundo caractere
                         // Analisado
-                        variance  = Math.max(variance, (primaryFreq - secondaryFreq));
+                        variance = Math.max(variance, (primaryFreq - secondaryFreq));
                     }
 
                     // Nós redefinimos nosso índice, então estamos ignorando a substring que irá
