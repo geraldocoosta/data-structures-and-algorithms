@@ -6,9 +6,6 @@ import java.util.Queue;
 
 public class KClosestPointsToOrigin {
 
-    //Time Complexity: O(NlogN), where N is the length of points.
-    //
-    //Space Complexity: O(N).
     public static void main(String[] args) {
         int[][] ints = new KClosestPointsToOrigin().kClosest(new int[][]{{1, 3}, {-2, 2}}, 1);
         for (int[] i : ints) {
@@ -16,18 +13,30 @@ public class KClosestPointsToOrigin {
         }
     }
 
-    public int[][] kClosest(int[][] points, int K) {
-        Queue<int[]> pq = new PriorityQueue<>((p1, p2) -> distance(p2) - distance(p1));
-        for (int[] p : points) {
-            pq.add(p);
-            if (pq.size() > K)
-                pq.poll();
+    //Time Complexity: O(NlogN), where N is the length of points.
+    //
+    //Space Complexity: O(N).
+    public int[][] kClosest(int[][] points, int k) {
+        // Priority queue implementa um heap
+        // se é max ou min será decidido com o comparator que eu passo como parametro
+        Queue<int[]> queue = new PriorityQueue<>((a, b) -> getDistance(a) - getDistance(b));
+
+        for (int i = 0; i < points.length; i++) {
+            queue.add(points[i]);
         }
-        return pq.toArray(new int[K][2]);
+
+        int[][] result = new int[k][2];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = queue.poll();
+        }
+
+        return result;
     }
 
-    private int distance(int[] point) {
-        return point[0] * point[0] + point[1] * point[1];
+
+    public int getDistance(int[] distance) {
+        return distance[0] * distance[0] + distance[1] * distance[1];
     }
 }
 
