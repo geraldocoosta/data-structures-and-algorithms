@@ -1,8 +1,10 @@
 package org.example.design;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
-import java.util.TreeMap;
+import java.util.Map;
 
 public class DesignInMemoryFileSystem {
 
@@ -15,84 +17,82 @@ public class DesignInMemoryFileSystem {
         System.out.println(fileSystem.readContentFromFile("/a/b/c/d"));
     }
 
-    public static class FileSystem {
-        private FileNode root;
+    static class FileSystem {
+        File root = null;
 
-        public FileSystem() {
-            root = new FileNode("");
+        FileSystem() {
+            root = new File();
         }
 
         public List<String> ls(String path) {
-            return findNode(path).getList();
+            String[] dirs = path.split("/");
+            List<String> result = new ArrayList<>();
+            Pair pairNameDir = getPairNameNode(dirs);
+            File node = pairNameDir.file;
+
+            if (node.isFile) {
+                result.add(pairNameDir.name);
+            } else {
+                for (String key : node.children.keySet()) {
+                    result.add(key);
+                }
+            }
+
+            Collections.sort(result);
+
+            return result;
         }
 
         public void mkdir(String path) {
-            findNode(path);
+            String[] dirs = path.split("/");
+            getPairNameNode(dirs);
         }
 
         public void addContentToFile(String filePath, String content) {
-            findNode(filePath).addContent(content);
+            String[] dirs = filePath.split("/");
+            File node = getPairNameNode(dirs).file;
+            node.isFile = true;
+            node.content += content;
         }
 
         public String readContentFromFile(String filePath) {
-            return findNode(filePath).getContent();
+            String[] dirs = filePath.split("/");
+            File node = getPairNameNode(dirs).file;
+
+            return node.content;
         }
 
-        //-- private method section --//
-        private FileNode findNode(String path) {
-            String[] files = path.split("/");
-
-            FileNode cur = root;
-            for (String file : files) {
-                if (file.length() == 0) continue;
-
-                cur.children.putIfAbsent(file, new FileNode(file));
-                cur = cur.children.get(file);
-
-                if (cur.isFile()) break;
-            }
-
-            return cur;
-        }
-
-        // Private class
-        private class FileNode {
-            private TreeMap<String, FileNode> children;
-            private StringBuilder file;
-            private String name;
-
-            public FileNode(String name) {
-                children = new TreeMap<>();
-                file = new StringBuilder();
-                this.name = name;
-            }
-
-            public String getContent() {
-                return file.toString();
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void addContent(String content) {
-                file.append(content);
-            }
-
-            public boolean isFile() {
-                return file.length() > 0;
-            }
-
-            public List<String> getList() {
-                List<String> list = new ArrayList<>();
-                if (isFile()) {
-                    list.add(getName());
-                } else {
-                    list.addAll(children.keySet());
+        private Pair getPairNameNode(String[] dirs) {
+            File node = root;
+            String name = "";
+            for (String dir : dirs) {
+                if (dir.length() == 0) {
+                    continue;
                 }
-
-                return list;
+                if (!node.children.containsKey(dir)) {
+                    File file = new File();
+                    node.children.put(dir, file);
+                }
+                node = node.children.get(dir);
+                name = dir;
             }
+            return new Pair(name, node);
+        }
+
+        class Pair {
+            String name;
+            File file;
+
+            Pair(String name, File file) {
+                this.name = name;
+                this.file = file;
+            }
+        }
+
+        class File {
+            boolean isFile = false;
+            Map<String, File> children = new HashMap<>();
+            String content = "";
         }
     }
 }
