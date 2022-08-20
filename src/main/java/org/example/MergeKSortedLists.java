@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class MergeKSortedLists {
 
@@ -65,24 +64,23 @@ public class MergeKSortedLists {
     // And the priority queue (often implemented with heaps) costs O(k) space (it's far less than NN in most situations).
 
     public ListNode mergeKLists2(ListNode[] lists) {
+        if (lists == null || lists.length == 0) return null;
 
-        Queue<ListNode> q = new PriorityQueue<>((o1, o2) -> o1.val - o2.val);
-        for (ListNode l : lists) {
-            if (l != null) {
-                q.add(l);
-            }
+        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, (a, b) -> a.val - b.val);
+
+        ListNode dummy = new ListNode(0);
+        ListNode aux = dummy;
+
+        for (ListNode node : lists)
+            if (node != null) queue.add(node);
+
+        while (!queue.isEmpty()) {
+            aux.next = queue.poll();
+            aux = aux.next;
+
+            if (aux.next != null) queue.add(aux.next);
         }
-        ListNode head = new ListNode(0);
-        ListNode point = head;
-        while (!q.isEmpty()) {
-            point.next = q.poll();
-            point = point.next;
-            ListNode next = point.next;
-            if (next != null) {
-                q.add(next);
-            }
-        }
-        return head.next;
+        return dummy.next;
     }
 
     public ListNode[] generateNodes() {
