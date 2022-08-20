@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class MostVisitedPattern {
+public class AnalyzeUserWebsiteVisitPattern {
 
     public static void main(String[] args) {
-        System.out.println(new MostVisitedPattern().mostVisitedPattern(
+        System.out.println(new AnalyzeUserWebsiteVisitPattern().mostVisitedPattern(
                 new String[]{"zkiikgv", "zkiikgv", "zkiikgv", "zkiikgv"},
                 new int[]{436363475, 710406388, 386655081, 797150921},
                 new String[]{"wnaaxbfhxp", "mryxsjc", "oz", "wlarkzzqht"}));

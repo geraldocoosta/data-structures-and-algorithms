@@ -5,15 +5,17 @@ import java.util.LinkedList;
 
 public class SumOfSubarrayRanges2 {
 
-    // Time O(n)
-    // Space O(5*n) -> usamos o stack no maximo uma vez por elemento
+    // Time O(5*n)
+    // Space O(n) -> usamos o stack no maximo uma vez por elemento
 
-    Deque<long[]> stack = new LinkedList<>();
 
 
     public static void main(String[] args) {
         System.out.println(new SumOfSubarrayRanges2().subArrayRanges(new int[]{3, 1, 2, 4}));
     }
+
+
+    Deque<long[]> stack = new LinkedList<>();
 
     public long subArrayRanges(int[] nums) {
 

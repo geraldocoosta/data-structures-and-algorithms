@@ -36,7 +36,12 @@ public class SubstringWithLargestVariance {
         }
         int variance = 0;
 
+        // O (n)
+
         // Passando sobre cada um dos caracteres
+
+        // O(n³)
+        // O(N)
         for (Character primaryChar : charCount.keySet()) {
             for (Character secondaryChar : charCount.keySet()) {
 

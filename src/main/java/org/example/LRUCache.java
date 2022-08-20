@@ -33,33 +33,33 @@ public class LRUCache {
 
     final int capacity;
     int size = 0;
-    HashMap<Integer, DoubleLinkedNode> keyValueMap = new HashMap<>();
-    private final DoubleLinkedNode head;
-    private final DoubleLinkedNode tail;
+    HashMap<Integer, Node> keyValueMap = new HashMap<>();
+    private final Node head;
+    private final Node tail;
 
     LRUCache(int capacity) {
         this.capacity = capacity;
-        this.head = new DoubleLinkedNode();
-        this.tail = new DoubleLinkedNode();
+        this.head = new Node();
+        this.tail = new Node();
 
         this.head.next = this.tail;
         this.tail.prev = this.head;
     }
 
     public void put(int key, int data) {
-        DoubleLinkedNode value = keyValueMap.get(key);
+        Node value = keyValueMap.get(key);
         if (value == null) {
-            DoubleLinkedNode node = new DoubleLinkedNode();
+            Node node = new Node();
             node.key = key;
             node.value = data;
 
             keyValueMap.put(key, node);
 
-            addFromDoubleLinkedNode(node);
+            addInHead(node);
             size++;
 
             if (size > capacity) {
-                DoubleLinkedNode removeNode = popTrail();
+                Node removeNode = popTrail();
                 keyValueMap.remove(removeNode.key);
                 size--;
             }
@@ -70,7 +70,7 @@ public class LRUCache {
     }
 
     public int get(int key) {
-        DoubleLinkedNode node = keyValueMap.get(key);
+        Node node = keyValueMap.get(key);
         if (node != null) {
             moveToHead(node);
             return node.value;
@@ -78,14 +78,14 @@ public class LRUCache {
         return -1;
     }
 
-    class DoubleLinkedNode {
+    private static class Node {
         int key;
         int value;
-        DoubleLinkedNode prev;
-        DoubleLinkedNode next;
+        Node prev;
+        Node next;
     }
 
-    private void addFromDoubleLinkedNode(DoubleLinkedNode node) {
+    private void addInHead(Node node) {
         node.prev = head;
         node.next = head.next;
 
@@ -94,23 +94,23 @@ public class LRUCache {
     }
 
     // Esse nó já existe e já tem uma ligação
-    private void removerNodeFromLinkedNode(DoubleLinkedNode node) {
-        DoubleLinkedNode prev = node.prev;
-        DoubleLinkedNode next = node.next;
+    private void removeNode(Node node) {
+        Node prev = node.prev;
+        Node next = node.next;
 
         prev.next = next;
         next.prev = prev;
     }
 
-    private DoubleLinkedNode popTrail() {
-        DoubleLinkedNode node = tail.prev;
-        removerNodeFromLinkedNode(node);
+    private Node popTrail() {
+        Node node = tail.prev;
+        removeNode(node);
         return node;
     }
 
-    private void moveToHead(DoubleLinkedNode node) {
-        removerNodeFromLinkedNode(node);
-        addFromDoubleLinkedNode(node);
+    private void moveToHead(Node node) {
+        removeNode(node);
+        addInHead(node);
     }
 }
 

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class SuggestedProducts {
+public class SearchSuggestionsSystem {
 
 
     public static void main(String[] args) {
         String[] strings = {"geladeira", "gelo", "gerson"};
-        System.out.println(new SuggestedProducts().suggestedProducts(strings, "gerson"));
+        System.out.println(new SearchSuggestionsSystem().suggestedProducts(strings, "gerson"));
     }
 
 
