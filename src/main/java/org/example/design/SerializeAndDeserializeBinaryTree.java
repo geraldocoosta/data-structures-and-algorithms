@@ -1,4 +1,6 @@
-package org.example;
+package org.example.design;
+
+import org.example.TreeNode;
 
 import java.util.Arrays;
 import java.util.LinkedList;
