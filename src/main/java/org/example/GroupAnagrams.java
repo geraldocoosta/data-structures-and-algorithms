@@ -34,7 +34,6 @@ public class GroupAnagrams {
             Arrays.sort(ca);
 
 
-
             // Crio uma key contendo os caracteres
             String key = String.valueOf(ca);
 

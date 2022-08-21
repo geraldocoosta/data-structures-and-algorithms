@@ -3,7 +3,9 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoundaryBinaryTree {
+public class BoundaryBinaryTree2 {
+
+    static List<Integer> nodes = new ArrayList<>(1000);
 
     public static void main(String[] args) {
         TreeNode treeNode = new TreeNode(1);
@@ -14,32 +16,53 @@ public class BoundaryBinaryTree {
         System.out.println(boundaryOfBinaryTree(treeNode));
     }
 
-
     public static List<Integer> boundaryOfBinaryTree(TreeNode root) {
-        List<Integer> res = new ArrayList<>();
-        if (root != null) {
-            res.add(root.val);
-            getBounds(root.left, res, true, false);
-            getBounds(root.right, res, false, true);
-        }
-        return res;
+
+        if (root == null) return nodes;
+
+        nodes.add(root.val);
+        leftBoundary(root.left);
+        leaves(root.left);
+        leaves(root.right);
+        rightBoundary(root.right);
+
+        return nodes;
     }
 
-    private static void getBounds(TreeNode node, List<Integer> res, boolean lb, boolean rb) {
-        if (node == null) {
+    public static void leftBoundary(TreeNode root) {
+        if (root == null || (root.left == null && root.right == null)) {
             return;
         }
-        if (lb) {
-            res.add(node.val);
+        nodes.add(root.val);
+        if (root.left == null) {
+            leftBoundary(root.right);
+        } else {
+            leftBoundary(root.left);
         }
-        if (!lb && !rb && node.left == null && node.right == null) {
-            res.add(node.val);
+    }
+
+    public static void rightBoundary(TreeNode root) {
+        if (root == null || (root.right == null && root.left == null)) {
+            return;
         }
-        getBounds(node.left, res, lb, rb && node.right == null);
-        getBounds(node.right, res, lb && node.left == null, rb);
-        if (rb) {
-            res.add(node.val);
+        if (root.right == null) {
+            rightBoundary(root.left);
+        } else {
+            rightBoundary(root.right);
         }
+        nodes.add(root.val); // add after child visit(reverse)
+    }
+
+    public static void leaves(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        if (root.left == null && root.right == null) {
+            nodes.add(root.val);
+            return;
+        }
+        leaves(root.left);
+        leaves(root.right);
     }
 }
 

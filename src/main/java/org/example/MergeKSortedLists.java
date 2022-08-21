@@ -66,7 +66,7 @@ public class MergeKSortedLists {
     public ListNode mergeKLists2(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;
 
-        PriorityQueue<ListNode> queue = new PriorityQueue<ListNode>(lists.length, (a, b) -> a.val - b.val);
+        PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, (a, b) -> a.val - b.val);
 
         ListNode dummy = new ListNode(0);
         ListNode aux = dummy;
