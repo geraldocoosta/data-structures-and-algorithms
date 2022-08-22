@@ -3,7 +3,7 @@ package org.example;
 public class SearchInRotatedSortedArray {
 
     public static void main(String[] args) {
-        System.out.println(new SearchInRotatedSortedArray().search(new int[] { 4,5,6,7,0,1,2 }, 0));
+        System.out.println(new SearchInRotatedSortedArray().search(new int[]{4, 5, 6, 7, 0, 1, 2}, 0));
     }
 
     public int search(int[] nums, int target) {
@@ -12,7 +12,8 @@ public class SearchInRotatedSortedArray {
         }
 
         /*.*/
-        int left = 0, right = nums.length - 1;
+        int left = 0;
+        int right = nums.length - 1;
         //when we use the condition "left <= right", we do not need to determine if nums[left] == target
         //in outside of loop, because the jumping condition is left > right, we will have the determination
         //condition if(target == nums[mid]) inside of loop
@@ -28,8 +29,7 @@ public class SearchInRotatedSortedArray {
                 //then safely drop the right part
                 if (nums[left] <= target && target < nums[mid]) {
                     right = mid - 1;
-                }
-                else {
+                } else {
                     //right bias
                     left = mid + 1;
                 }
@@ -41,8 +41,7 @@ public class SearchInRotatedSortedArray {
                 //then safely drop the left part
                 if (nums[mid] < target && target <= nums[right]) {
                     left = mid + 1;
-                }
-                else {
+                } else {
                     right = mid - 1;
                 }
             }
