@@ -2,8 +2,13 @@ package org.example;
 
 public class CanJump {
 
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 1, 1, 4};
+        System.out.println(canJump(arr));
+    }
 
-    public boolean canJump(int[] nums) {
+    // O(n) time and O(1) space
+    public static boolean canJump(int[] nums) {
         int len = nums.length;
         int max = 0;
         for (int i = 0; i <= max; i++) {
