@@ -1,55 +1,64 @@
 package org.example;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MinimumWindowSubstring {
-    public String minWindow(String s, String t) {
-        if (s == null || s.length() < t.length() || s.length() == 0) {
-            return "";
-        }
 
-        HashMap<Character, Integer> map = new HashMap<Character, Integer>();
-        for (char c : t.toCharArray()) {
-            if (map.containsKey(c)) {
-                map.put(c, map.get(c) + 1);
-            } else {
-                map.put(c, 1);
-            }
-        }
+    public static void main(String[] args) {
+        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+    }
 
 
+    public static String minWindow(String s, String t) {
+        // corner case
+        if (s == null || t == null || s.length() == 0 || t.length() == 0 || s.length() < t.length()) return "";
 
-        int left = 0;
+        // construct model
         int minLeft = 0;
-        int minLen = s.length() + 1;
-        int count = 0;
+        int minRight = 0;
+        int min = s.length();
+        boolean flag = false;
 
-        for (int right = 0; right < s.length(); right++) {
-            if (map.containsKey(s.charAt(right))) {
-                map.put(s.charAt(right), map.get(s.charAt(right)) - 1);
-                if (map.get(s.charAt(right)) >= 0) {
-                    count++;
-                }
-                while (count == t.length()) {
-                    if (right - left + 1 < minLen) {
-                        minLeft = left;
-                        minLen = right - left + 1;
-                    }
-                    if (map.containsKey(s.charAt(left))) {
-                        map.put(s.charAt(left), map.get(s.charAt(left)) + 1);
-                        if (map.get(s.charAt(left)) > 0) {
-                            count--;
-                        }
-                    }
-                    left++;
-                }
+        Map<Character, Integer> map = new HashMap<>();
+        int count = t.length(); // the number of characters that I need to match
+        for (char c : t.toCharArray()) {
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        // unfixed sliding window, 2 pointers
+        int i = 0;
+        int j = 0;
+        while (j < s.length()) {
+            char c = s.charAt(j);
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) - 1);
+                if (map.get(c) >= 0) count--; // if still unmatched characters, then count--
             }
-        }
-        if (minLen > s.length()) {
-            return "";
+
+            // if found a susbtring
+            while (count == 0 && i <= j) {
+                // update global min
+                flag = true;
+                int curLen = j + 1 - i;
+                if (curLen <= min) {
+                    minLeft = i;
+                    minRight = j;
+                    min = curLen;
+                }
+
+                // shrink left pointer
+                char leftC = s.charAt(i);
+                if (map.containsKey(leftC)) {
+                    map.put(leftC, map.get(leftC) + 1);
+                    if (map.get(leftC) >= 1) count++;
+                }
+                i++;
+            }
+            j++;
         }
 
-        return s.substring(minLeft, minLeft + minLen);
+        return flag == true ? s.substring(minLeft, minRight + 1) : "";
     }
 }
 
