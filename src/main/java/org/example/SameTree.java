@@ -28,8 +28,8 @@ public class SameTree {
         if (!check(p, q)) return false;
 
         // init deques
-        ArrayDeque<TreeNode> deqP = new ArrayDeque<TreeNode>();
-        ArrayDeque<TreeNode> deqQ = new ArrayDeque<TreeNode>();
+        ArrayDeque<TreeNode> deqP = new ArrayDeque<>();
+        ArrayDeque<TreeNode> deqQ = new ArrayDeque<>();
         deqP.addLast(p);
         deqQ.addLast(q);
 
