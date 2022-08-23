@@ -1,13 +1,8 @@
 package org.example;
 
 
-import java.util.ArrayList;
-
-
 public class WordSearch {
 
-    char[][] board = null;
-    ArrayList<String> result = new ArrayList<>();
 
     public static void main(String[] args) {
         System.out.println(new WordSearch()
