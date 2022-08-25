@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class MinimumWindowSubstring {
 
@@ -17,7 +16,7 @@ public class MinimumWindowSubstring {
         }
 
         // popular o hash map T
-        Map<Character, Integer> hashMapT = new HashMap<Character, Integer>();
+        var hashMapT = new HashMap<Character, Integer>();
         for (int i = 0; i < t.length(); i++) {
             hashMapT.put(t.charAt(i), hashMapT.getOrDefault(t.charAt(i), 0) + 1);
         }
@@ -29,7 +28,7 @@ public class MinimumWindowSubstring {
         int formed = 0;
 
         // HashMap para guardar caracteres da janela
-        Map<Character, Integer> windowCounts = new HashMap<Character, Integer>();
+        var windowCounts = new HashMap<Character, Integer>();
 
         // resposta
         int len = -1;
