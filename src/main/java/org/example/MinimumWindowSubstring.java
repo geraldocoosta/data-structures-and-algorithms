@@ -11,54 +11,69 @@ public class MinimumWindowSubstring {
 
 
     public static String minWindow(String s, String t) {
-        // corner case
-        if (s == null || t == null || s.length() == 0 || t.length() == 0 || s.length() < t.length()) return "";
 
-        // construct model
-        int minLeft = 0;
-        int minRight = 0;
-        int min = s.length();
-        boolean flag = false;
-
-        Map<Character, Integer> map = new HashMap<>();
-        int count = t.length(); // the number of characters that I need to match
-        for (char c : t.toCharArray()) {
-            map.put(c, map.getOrDefault(c, 0) + 1);
+        if (s.length() == 0 || t.length() == 0) {
+            return "";
         }
 
-        // unfixed sliding window, 2 pointers
-        int i = 0;
-        int j = 0;
-        while (j < s.length()) {
-            char c = s.charAt(j);
-            if (map.containsKey(c)) {
-                map.put(c, map.get(c) - 1);
-                if (map.get(c) >= 0) count--; // if still unmatched characters, then count--
-            }
-
-            // if found a susbtring
-            while (count == 0 && i <= j) {
-                // update global min
-                flag = true;
-                int curLen = j + 1 - i;
-                if (curLen <= min) {
-                    minLeft = i;
-                    minRight = j;
-                    min = curLen;
-                }
-
-                // shrink left pointer
-                char leftC = s.charAt(i);
-                if (map.containsKey(leftC)) {
-                    map.put(leftC, map.get(leftC) + 1);
-                    if (map.get(leftC) >= 1) count++;
-                }
-                i++;
-            }
-            j++;
+        // popular o hash map T
+        Map<Character, Integer> hashMapT = new HashMap<Character, Integer>();
+        for (int i = 0; i < t.length(); i++) {
+            hashMapT.put(t.charAt(i), hashMapT.getOrDefault(t.charAt(i), 0) + 1);
         }
 
-        return flag == true ? s.substring(minLeft, minRight + 1) : "";
+        // valor total que precisamos
+        int required = hashMapT.size();
+
+        // variavel para guardar quantos caracteres necessário capturamos até agora
+        int formed = 0;
+
+        // HashMap para guardar caracteres da janela
+        Map<Character, Integer> windowCounts = new HashMap<Character, Integer>();
+
+        // resposta
+        int len = -1;
+        int start = 0;
+        int end = 0;
+
+        // ponteiros left e right
+        int left = 0;
+        for (int right = 0; right < s.length(); right++ ) {
+            char c = s.charAt(right);
+            // vou ir colocando qualquer caractere no hash map da janela
+            windowCounts.put(c, windowCounts.getOrDefault(c, 0) + 1);
+
+            // se o caractere que eu coloquei no hash map da janela existe no hashT
+            // e a quantidade de vezes que achei ele for igual da quantidade de vezes que ele tá no hashT
+            // eu incremento o formed, mais ou menos dizendo que encontrei um caractere valido
+            if (hashMapT.containsKey(c) && windowCounts.get(c).intValue() == hashMapT.get(c).intValue()) {
+                formed++;
+            }
+
+            // se fomed == required, eu tenho uma janela valida
+            while (left <= right && formed == required) {
+                c = s.charAt(left);
+                // aqui eu verifico se a janela atual é menor que a janela já salva
+                if (len == -1 || right - left + 1 < len) {
+                    len = right - left + 1;
+                    start = left;
+                    end = right;
+                }
+
+                // tiro o caractere da esquerda da janela
+                windowCounts.put(c, windowCounts.get(c) - 1);
+
+                // se esse caractere for um que faz a janela estar valida, tenho que decrementar o formed
+                if (hashMapT.containsKey(c) && windowCounts.get(c) < hashMapT.get(c)) {
+                    formed--;
+                }
+
+                // ando com o ponteiro do left, diminuindo a janela
+                left++;
+            }
+        }
+
+        return len == -1 ? "" : s.substring(start, end + 1);
     }
 }
 
