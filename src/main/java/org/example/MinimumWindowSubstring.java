@@ -22,36 +22,36 @@ public class MinimumWindowSubstring {
         }
 
         // valor total que precisamos
-        int required = hashMapT.size();
+        var required = hashMapT.size();
 
         // variavel para guardar quantos caracteres necessário capturamos até agora
-        int formed = 0;
+        var formed = 0;
 
         // HashMap para guardar caracteres da janela
         var windowCounts = new HashMap<Character, Integer>();
 
         // resposta
-        int len = -1;
-        int start = 0;
-        int end = 0;
+        var len = -1;
+        var start = 0;
+        var end = 0;
 
         // ponteiros left e right
-        int left = 0;
+        var left = 0;
         for (int right = 0; right < s.length(); right++ ) {
-            char c = s.charAt(right);
+            var charAtRight = s.charAt(right);
             // vou ir colocando qualquer caractere no hash map da janela
-            windowCounts.put(c, windowCounts.getOrDefault(c, 0) + 1);
+            windowCounts.put(charAtRight, windowCounts.getOrDefault(charAtRight, 0) + 1);
 
             // se o caractere que eu coloquei no hash map da janela existe no hashT
             // e a quantidade de vezes que achei ele for igual da quantidade de vezes que ele tá no hashT
             // eu incremento o formed, mais ou menos dizendo que encontrei um caractere valido
-            if (hashMapT.containsKey(c) && windowCounts.get(c).intValue() == hashMapT.get(c).intValue()) {
+            if (hashMapT.containsKey(charAtRight) && windowCounts.get(charAtRight).intValue() == hashMapT.get(charAtRight).intValue()) {
                 formed++;
             }
 
             // se fomed == required, eu tenho uma janela valida
             while (left <= right && formed == required) {
-                c = s.charAt(left);
+
                 // aqui eu verifico se a janela atual é menor que a janela já salva
                 if (len == -1 || right - left + 1 < len) {
                     len = right - left + 1;
@@ -60,10 +60,11 @@ public class MinimumWindowSubstring {
                 }
 
                 // tiro o caractere da esquerda da janela
-                windowCounts.put(c, windowCounts.get(c) - 1);
+                var charAtLeft = s.charAt(left);
+                windowCounts.put(charAtLeft, windowCounts.get(charAtLeft) - 1);
 
                 // se esse caractere for um que faz a janela estar valida, tenho que decrementar o formed
-                if (hashMapT.containsKey(c) && windowCounts.get(c) < hashMapT.get(c)) {
+                if (hashMapT.containsKey(charAtLeft) && windowCounts.get(charAtLeft) < hashMapT.get(charAtLeft)) {
                     formed--;
                 }
 
