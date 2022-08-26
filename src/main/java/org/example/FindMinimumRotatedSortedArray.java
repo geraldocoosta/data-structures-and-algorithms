@@ -6,7 +6,6 @@ public class FindMinimumRotatedSortedArray {
         System.out.println(findMin(new int[]{7,8,1,2,3,4,5,6}));
     }
 
-
     public static int findMin(int[] nums) {
         if (nums.length == 1) {
             return nums[0];
@@ -15,8 +14,6 @@ public class FindMinimumRotatedSortedArray {
         int left = 0;
         int right = nums.length - 1;
 
-        // Se meu elemento da direita for maior que o da esquerda
-        // meu array está ordenado sem giros
         if (nums[right] > nums[0]) {
             return nums[0];
         }
@@ -37,7 +34,7 @@ public class FindMinimumRotatedSortedArray {
         }
 
 
-        if (nums[mid] > nums[0]) {
+        if (nums[mid] > nums[left]) {
             return binarySearch(nums, mid + 1, right);
         } else {
             return binarySearch(nums, left, mid - 1);
