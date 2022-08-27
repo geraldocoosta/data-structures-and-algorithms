@@ -15,7 +15,7 @@ public class InvertBinaryTree {
 
     public TreeNode invertTree2(TreeNode root) {
         if (root == null) return null;
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         while (!queue.isEmpty()) {
             TreeNode current = queue.poll();
