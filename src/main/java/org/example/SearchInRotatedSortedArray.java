@@ -10,8 +10,7 @@ public class SearchInRotatedSortedArray {
         return binarySearch(nums, 0, nums.length - 1, target);
     }
 
-
-    private int binarySearch(int[] nums, int left, int right, int target) {
+    public int binarySearch(int[] nums, int left, int right, int target) {
 
         var mid = (right + left) / 2;
 
@@ -48,6 +47,48 @@ public class SearchInRotatedSortedArray {
         return -1;
 
     }
+
+    public int search2(int[] nums, int target) {
+        int left = 0;
+        int right = nums.length - 1;
+
+        while (left <= right) {
+
+            int mid = (left + right) / 2;
+
+            if (nums[mid] == target){
+                return mid;
+            }
+
+
+            // se estiver ordenado da minha ponta esquerda até o mid
+            // eu sei que o minha desordenação tá na direita
+            if (nums[left] <= nums[mid]) {
+
+                // se meu target for maior que minha ponta esquerda
+                // e for menor que minha o meio, é um binary search normal na esquerda
+                if (target >= nums[left] && target < nums[mid]) {
+                    right = mid - 1;
+                } else { // se não, tenho que procurar na direita
+                    left = mid + 1;
+                }
+
+            } else { // entramos nesse else, sabendo que a minha esquerda está desordenada
+
+                // se meu target for menor que a ponta direita e maior que meu mid
+                // é uma binary search na direita
+                if (target <= nums[right] && target > nums[mid]) {
+                    left = mid + 1;
+                } else { // se não, procura na direita
+                    right = mid - 1;
+                }
+
+            }
+        }
+        return -1;
+    }
+
+
 }
 
 /*
