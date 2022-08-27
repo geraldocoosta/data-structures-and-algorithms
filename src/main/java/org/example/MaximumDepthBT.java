@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.Deque;
 import java.util.LinkedList;
 
 public class MaximumDepthBT {
@@ -8,34 +9,54 @@ public class MaximumDepthBT {
         if (root == null) {
             return 0;
         }
-        int leftHeight = maxDepth(root.left);
-        int rightHeight = maxDepth(root.right);
-        return Math.max(leftHeight, rightHeight) + 1;
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        return Math.max(maxDepth(root.left), maxDepth(root.right)) + 1;
 
     }
 
     public int maxDepth2(TreeNode root) {
-        LinkedList<TreeNode> stack = new LinkedList<>();
-        LinkedList<Integer> depths = new LinkedList<>();
         if (root == null) return 0;
 
-        stack.add(root);
-        depths.add(1);
+        int max = 1;
 
-        int depth = 0;
-        int currentDepth = 0;
-        while (!stack.isEmpty()) {
-            root = stack.pollLast();
-            currentDepth = depths.pollLast();
-            if (root != null) {
-                depth = Math.max(depth, currentDepth);
-                stack.add(root.left);
-                stack.add(root.right);
-                depths.add(currentDepth + 1);
-                depths.add(currentDepth + 1);
+        // uma stack para armazenar os nós
+        Deque<TreeNode> nodes = new LinkedList<>();
+        // outra para armazenar os niveis
+        Deque<Integer> depths = new LinkedList<>();
+
+        // coloco o primeiro nivel
+        nodes.push(root);
+        // o primeiro nivel é representado pelo 1
+        depths.push(1);
+
+        while (!nodes.isEmpty()) {
+            // pego o nó e o nível
+            TreeNode curr = nodes.pop();
+            int depth = depths.pop();
+
+            // se o nó for folha, atualizo o max
+            if (curr.left == null && curr.right == null) {
+                max = Math.max(max, depth);
+            }
+
+            // se o nó tiver filho esquerdo, coloco na stack
+            if (curr.right != null) {
+                nodes.push(curr.right);
+                // o nivel do filho vai ser nivel atual + 1
+                depths.push(depth + 1);
+            }
+            // se o nó tiver filho direito, coloco na stack
+            if (curr.left != null) {
+                nodes.push(curr.left);
+                // o nivel do filho vai ser nivel atual + 1
+                depths.push(depth + 1);
             }
         }
-        return depth;
+
+        return max;
+
     }
 
 }
