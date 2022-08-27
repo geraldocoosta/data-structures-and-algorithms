@@ -59,9 +59,9 @@ public class MergeKSortedLists {
     // Time space O(NLogN)
     // Space complexity :
     //
-    //O(n) Creating a new linked list costs O(n)O(n) space.
+    //O(n) Creating a new linked list costs O(n) space.
     //O(k) The code above present applies in-place method which cost O(1) space.
-    // And the priority queue (often implemented with heaps) costs O(k) space (it's far less than NN in most situations).
+    // And the priority queue (often implemented with heaps) costs O(k) space (it's far less than N in most situations).
 
     public ListNode mergeKLists2(ListNode[] lists) {
         if (lists == null || lists.length == 0) return null;
