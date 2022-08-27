@@ -17,6 +17,10 @@ public class RemoveNthNodeFromEndList {
     //
     // Space complexity : O(1).
     public ListNode removeNthFromEnd(ListNode head, int n) {
+
+
+        // a pegadinha do dummy é a seguinte, e se eu tiver que remover meu primeiro elemento?
+        // aí eu preciso de um dummy, que é um elemento que aponta para o primeiro elemento da lista
         ListNode dummy = new ListNode(0);
         dummy.next = head;
 
