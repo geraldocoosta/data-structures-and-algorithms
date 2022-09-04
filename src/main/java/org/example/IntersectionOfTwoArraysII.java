@@ -54,7 +54,7 @@ public class IntersectionOfTwoArraysII {
                 nums1[k] = nums1[i];
                 k++;
                 i++;
-                ++j;
+                j++;
             }
         }
         var result = new int[k];
