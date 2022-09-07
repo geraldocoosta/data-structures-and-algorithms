@@ -14,6 +14,8 @@ public class KthSmallestElementBST {
 		System.out.println(kthSmallest(root, k));
 	}
 
+	// Time: O(n)
+	// Space: O(n)
 	public static int kthSmallest(TreeNode root, int k) {
 
 		List<Integer> nums = inorder(root, new ArrayList<>());
