@@ -16,6 +16,7 @@ public class BalancedHeightBinaryTree {
 	}
 
 	public static boolean isBalanced(TreeNode root) {
+
 		return dfsHeight(root) != -1;
 	}
 
@@ -25,12 +26,12 @@ public class BalancedHeightBinaryTree {
 			return 0;
 		}
 
-		var resultLeft = dfsHeight(root.left);
+		int resultLeft = dfsHeight(root.left);
 		if (resultLeft == -1) {
 			return -1;
 		}
 
-		var resultRight = dfsHeight(root.right);
+		int resultRight = dfsHeight(root.right);
 		if (resultRight == -1) {
 			return -1;
 		}
