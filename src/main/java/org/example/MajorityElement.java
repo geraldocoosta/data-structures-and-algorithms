@@ -37,24 +37,7 @@ public class MajorityElement {
 			return nums[0];
 		}
 		Arrays.sort(nums);
-		var maxCount = -1;
-		var index = -1;
-
-		var count = 1;
-
-		for (int i = 1; i < nums.length; i++) {
-			if (nums[i] == nums[i - 1]) {
-				count++;
-				if (count > maxCount) {
-					maxCount = count;
-					index = i;
-				}
-			} else {
-				count = 1;
-			}
-		}
-
-		return nums[index];
+		return nums[nums.length/2];
 	}
 
 }
