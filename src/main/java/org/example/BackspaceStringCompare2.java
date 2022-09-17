@@ -40,8 +40,6 @@ public class BackspaceStringCompare2 {
             } else {
                 break;
             }
-
-
         }
 
         return sLength == -1 && tLength == -1;
