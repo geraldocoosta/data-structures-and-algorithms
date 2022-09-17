@@ -15,13 +15,14 @@ public class BackspaceStringCompare3 {
     		return build(s).equals(build(t));
     	}
 
-    	public static String build(String S) {
+    	public static String build(String s) {
     		LinkedList<Character> ans = new LinkedList<>();
-    		for (char c: S.toCharArray()) {
-    			if (c != '#')
+    		for (char c: s.toCharArray()) {
+    			if (c != '#'){
     				ans.push(c);
-    			else if (!ans.isEmpty())
+                } else if (!ans.isEmpty()) {
     				ans.pop();
+                }
     		}
 
             StringBuilder stringBuilder = new StringBuilder();
