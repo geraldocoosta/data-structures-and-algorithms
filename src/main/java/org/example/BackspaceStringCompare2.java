@@ -2,34 +2,50 @@ package org.example;
 
 public class BackspaceStringCompare2 {
 
-	public static void main(String[] args) {
-		String s = "ab#c";
-		String t = "ad#c";
-		System.out.println(backspaceCompare(s, t));
-	}
+    public static void main(String[] args) {
+        String s = "ab#c";
+        String t = "ad#c";
+        System.out.println(backspaceCompare(s, t));
+    }
 
-	public static boolean backspaceCompare(String s, String t) {
-		int i = s.length()-1;
-		int j = t.length()-1;
-		int countS = 0;
-		int countT = 0;
-		while (i >= 0 || j >= 0) {
-			while (i >= 0 && (countS > 0 || s.charAt(i) == '#')) {
-				if (s.charAt(i) == '#') countS++;
-				else countS--;
-				i--;
-			}
-			char left = i < 0 ? '@' : s.charAt(i);
-			while (j >= 0 && (countT > 0 || t.charAt(j) == '#')) {
-				if (t.charAt(j) == '#') countT++;
-				else countT--;
-				j--;
-			}
-			char right = j < 0 ? '@' : t.charAt(j);
-			if (left != right) return false;
-			i--;
-			j--;
-		}
-		return true;
-	}
+    public static boolean backspaceCompare(String s, String t) {
+        var sLength = s.length() - 1;
+        var tLength = t.length() - 1;
+        var countS = 0;
+        var countT = 0;
+
+        while (sLength >= 0 || tLength >= 0) {
+            while (sLength >= 0 && (s.charAt(sLength) == '#' || countS > 0)) {
+                if (s.charAt(sLength) == '#') {
+                    countS++;
+                } else {
+                    countS--;
+                }
+                sLength--;
+            }
+
+            while (tLength >= 0 && (t.charAt(tLength) == '#' || countT > 0)) {
+                if (t.charAt(tLength) == '#') {
+                    countT++;
+                } else {
+                    countT--;
+                }
+                tLength--;
+            }
+
+            if (sLength >= 0 && tLength < 0 || sLength < 0 && tLength >= 0) {
+                return false;
+            }
+
+            if (s.charAt(sLength) != t.charAt(tLength)) {
+                return false;
+            }
+
+            sLength--;
+            tLength--;
+
+        }
+
+        return true;
+    }
 }

@@ -1,29 +1,34 @@
 package org.example;
 
-import java.util.Deque;
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class BackspaceStringCompare3 {
 
-	public static void main(String[] args) {
-		String s = "ab#c";
-		String t = "ad#c";
-		System.out.println(backspaceCompare(s, t));
-	}
+    public static void main(String[] args) {
 
-	public static boolean backspaceCompare(String S, String T) {
-		return build(S).equals(build(T));
-	}
+        String s = "abb##c";
+        String t = "ad#c";
+        System.out.println(backspaceCompare(s, t));
+    }
 
-	public static String build(String S) {
-		LinkedList<Character> ans = new LinkedList<>();
-		for (char c: S.toCharArray()) {
-			if (c != '#')
-				ans.push(c);
-			else if (!ans.isEmpty())
-				ans.pop();
-		}
-		return String.valueOf(ans);
-	}
+    	public static boolean backspaceCompare(String s, String t) {
+    		return build(s).equals(build(t));
+    	}
+
+    	public static String build(String S) {
+    		LinkedList<Character> ans = new LinkedList<>();
+    		for (char c: S.toCharArray()) {
+    			if (c != '#')
+    				ans.push(c);
+    			else if (!ans.isEmpty())
+    				ans.pop();
+    		}
+
+            StringBuilder stringBuilder = new StringBuilder();
+            while (!ans.isEmpty()) {
+                stringBuilder.append(ans.pop());
+            }
+            return stringBuilder.toString();
+    	}
+
 }
