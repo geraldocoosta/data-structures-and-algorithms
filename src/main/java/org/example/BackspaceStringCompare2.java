@@ -3,45 +3,45 @@ package org.example;
 public class BackspaceStringCompare2 {
 
     public static void main(String[] args) {
-        String s = "ab##";
-        String t = "c#d#";
+        String s = "xywrrmp";
+        String t = "xywrrmu#p";
         System.out.println(backspaceCompare(s, t));
     }
 
     public static boolean backspaceCompare(String s, String t) {
-        var sLength = s.length() - 1;
-        var tLength = t.length() - 1;
-        var countS = 0;
-        var countT = 0;
+        var lengthS = s.length() - 1;
+        var lengthT = t.length() - 1;
+        var count = 0;
 
-        while (sLength >= 0 || tLength >= 0) {
-            while (sLength >= 0 && (s.charAt(sLength) == '#' || countS > 0)) {
-                if (s.charAt(sLength) == '#') {
-                    countS++;
+        while (lengthS >= 0 || lengthT >= 0) {
+            while (lengthS >= 0 && (count > 0 || s.charAt(lengthS) == '#')) {
+                if (s.charAt(lengthS) == '#') {
+                    count++;
                 } else {
-                    countS--;
+                    count--;
                 }
-                sLength--;
+
+                lengthS--;
             }
 
-            while (tLength >= 0 && (t.charAt(tLength) == '#' || countT > 0)) {
-                if (t.charAt(tLength) == '#') {
-                    countT++;
+            count = 0;
+            while (lengthT >= 0 && (count > 0 || s.charAt(lengthT) == '#')) {
+                if (s.charAt(lengthT) == '#') {
+                    count++;
                 } else {
-                    countT--;
+                    count--;
                 }
-                tLength--;
+                lengthT--;
             }
 
-
-            if (sLength >= 0 && tLength >= 0 && s.charAt(sLength) == t.charAt(tLength)) {
-                sLength--;
-                tLength--;
+            if (lengthS >= 0 && lengthT >= 0 && s.charAt(lengthT) == s.charAt(lengthS)) {
+                lengthT--;
+                lengthS--;
             } else {
                 break;
             }
         }
 
-        return sLength == -1 && tLength == -1;
+        return lengthS == -1 && lengthT == -1;
     }
 }

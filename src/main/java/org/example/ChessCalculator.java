@@ -9,9 +9,7 @@ public class ChessCalculator {
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
                         {0, 0, 0, 0},
-                }, 3, 3)
-
-        );
+                }, 3, 3));
     }
 
     public int countQueenMovies(int[][] board, int row, int column) {
