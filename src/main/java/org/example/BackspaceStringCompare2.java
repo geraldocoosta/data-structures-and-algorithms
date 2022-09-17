@@ -3,8 +3,8 @@ package org.example;
 public class BackspaceStringCompare2 {
 
     public static void main(String[] args) {
-        String s = "ab#c";
-        String t = "ad#c";
+        String s = "ab##";
+        String t = "c#d#";
         System.out.println(backspaceCompare(s, t));
     }
 
@@ -33,19 +33,17 @@ public class BackspaceStringCompare2 {
                 tLength--;
             }
 
-            if (sLength >= 0 && tLength < 0 || sLength < 0 && tLength >= 0) {
-                return false;
+
+            if (sLength >= 0 && tLength >= 0 && s.charAt(sLength) == t.charAt(tLength)) {
+                sLength--;
+                tLength--;
+            } else {
+                break;
             }
 
-            if (s.charAt(sLength) != t.charAt(tLength)) {
-                return false;
-            }
-
-            sLength--;
-            tLength--;
 
         }
 
-        return true;
+        return sLength == -1 && tLength == -1;
     }
 }
