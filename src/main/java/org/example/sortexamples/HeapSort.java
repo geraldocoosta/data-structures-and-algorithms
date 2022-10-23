@@ -1,44 +1,53 @@
 package org.example.sortexamples;
 
+import java.util.Arrays;
+
 public class HeapSort {
 
     public static void main(String[] args) {
-        int[] arr = {4, 8, 16, 1, 2, 0, 56, 23};
-        heapSort(arr);
-        for (int i = 0; i < arr.length; i++) {
-            System.out.println(arr[i]);
+        int[] arr = {0,0,2,1,0,1,2,0,2,1,0};
+        sort(arr);
+        System.out.println(
+                Arrays.toString(arr)
+        );
+    }
+
+
+    public static void sort(int[] nums) {
+
+        var length = nums.length;
+
+        for (int i = length / 2 - 1; i >= 0; i--) {
+            heapify(nums, length, i);
+        }
+
+        for (int i = length - 1; i >= 0; i--) {
+            swap(nums, 0, i);
+            heapify(nums, i, 0);
         }
     }
 
-    public static void heapSort(int[] arr) {
-        for (int i = arr.length / 2 - 1; i >= 0; i--) {
-            heapify(arr, arr.length, i);
-        }
-        for (int i = arr.length - 1; i >= 0; i--) {
-            swap(arr, 0, i);
-            heapify(arr, i, 0);
-        }
-    }
+    public static void heapify(int[] nums, int finalIndex, int index) {
+        var largest = index;
+        var l = largest * 2 + 1;
+        var r = largest * 2 + 2;
 
-    public static void heapify(int[] arr, int n, int i) {
-        int largest = i;
-        int l = 2 * i + 1;
-        int r = 2 * i + 2;
-        if (l < n && arr[l] > arr[largest]) {
+        if (l < finalIndex && nums[l] > nums[largest]) {
             largest = l;
         }
-        if (r < n && arr[r] > arr[largest]) {
+        if (r < finalIndex && nums[r] > nums[largest]) {
             largest = r;
         }
-        if (largest != i) {
-            swap(arr, i, largest);
-            heapify(arr, n, largest);
+
+        if (largest != index){
+            swap(nums, index, largest);
+            heapify(nums, finalIndex, largest);
         }
     }
 
-    public static void swap(int[] arr, int i, int j) {
-        int temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+    public static void swap(int[] nums, int index1 , int index2) {
+        var aux = nums[index1];
+        nums[index1] = nums[index2];
+        nums[index2] = aux;
     }
 }
