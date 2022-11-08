@@ -5,34 +5,33 @@ import java.util.Map;
 
 public class ConstructBinaryTreefromPreorderInorderTraversal {
 
+    public static void main(String[] args) {
+        System.out.println(new Solution1().buildTree(new int[]{3, 9, 20, 15, 7}, new int[]{9, 3, 15, 20, 7}));
+    }
 
     static class Solution1 {
-        int preorderIndex;
-        Map<Integer, Integer> inorderIndexMap;
+        int preoderIndex;
+        Map<Integer, Integer> inorderMap;
 
         public TreeNode buildTree(int[] preorder, int[] inorder) {
-            preorderIndex = 0;
-            // build a hashmap to store value -> its index relations
-            inorderIndexMap = new HashMap<>();
+            inorderMap = new HashMap<>();
+            preoderIndex = 0;
+
             for (int i = 0; i < inorder.length; i++) {
-                inorderIndexMap.put(inorder[i], i);
+                inorderMap.put(inorder[i], i);
             }
 
-            return arrayToTree(preorder, 0, preorder.length - 1);
+            return helper(preorder, 0, preorder.length - 1);
         }
 
-        private TreeNode arrayToTree(int[] preorder, int left, int right) {
-            // if there are no elements to construct the tree
+        public TreeNode helper(int[] preorder, int left, int right) {
             if (left > right) return null;
 
-            // select the preorder_index element as the root and increment it
-            int rootValue = preorder[preorderIndex++];
-            TreeNode root = new TreeNode(rootValue);
+            var root = new TreeNode(preorder[preoderIndex++]);
 
-            // build left and right subtree
-            // excluding inorderIndexMap[rootValue] element because it's the root
-            root.left = arrayToTree(preorder, left, inorderIndexMap.get(rootValue) - 1);
-            root.right = arrayToTree(preorder, inorderIndexMap.get(rootValue) + 1, right);
+            root.left = helper(preorder, left, inorderMap.get(root.val) - 1);
+            root.right = helper(preorder, inorderMap.get(root.val) + 1, right);
+
             return root;
         }
     }
